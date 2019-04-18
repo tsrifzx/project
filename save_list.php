@@ -1,0 +1,183 @@
+<?php session_start();?>
+<?php
+if (!$_SESSION["UserID"]){  //check session
+ 
+	  Header("Location: login.php"); //ไม่พบผู้ใช้กระโดดกลับไปหน้า login form 
+ 
+}else{?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="../css/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../css/fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+<script type="text/javascript" src="../js/jquery-2.0.2.js" ></script>
+<script type="text/javascript" src="../js/insertitemvalidation.js" ></script>
+<script type="text/javascript" src="../js/unitvalidation.js" ></script>
+<script type="text/javascript" src="../js/typevalidation.js" ></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css" />
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+<div  class="container">
+	<div id="header">
+		<div id="logo">
+			<img src="../img/2.png" alt="" style="width:140px" /><br>
+			<a href="#" style="font-size:12pt">ระบบจัดการวัสดุสำนักงาน</a><br>
+			<span><a href="#" rel="nofollow" style="font-size:10pt">Inventory  Control  System</a></span>
+		</div>
+		<div id="menu">
+			<ul>
+				<li class="current_page_item"><a href='../admin1/list_inventory.php' accesskey='1' title=''>รายการวัสดุ<br><span class='enrightlink'> Inventory List</span></a></li>
+				<li><a href='../admin1/list_request.php' accesskey='2' title=''>รายการขอเบิกวัสดุ<br><span class='enrightlink'>Request Article List</span></a></li>
+				<li><a href='../admin1/save_type.php' accesskey='31' title=''>บันทึกประเภทวัสดุ<br><span class='enrightlink'>Save Article Type</span></a></li>
+				<li><a href='../admin1/save_list.php' accesskey='32' title=''>บันทึก/แก้ไขรายการวัสดุ<br><span class='enrightlink'>Save Article List</span></a></li>
+				<li><a href='../admin1/save_unit.php' accesskey='33' title=''>บันทึกหน่วยนับวัสดุ<br><span class='enrightlink'>Save Article Unit</span></a></li>
+						
+						<li><a href='../admin1/yreport.php' accesskey='42' title=''>รายงานวัสดุประจำปี<br><span class='enrightlink'>Annual Article Report</span></a></li>
+				<li><a href='../admin/member_manage.php' accesskey='43' title=''>จัดการข้อมูลสมาชิก<br><span class='enrightlink'>Member Management</span></a></li>
+				<li><a href="../Login/logout.php"  onclick="return confirm('ยืนยันการออกจากระบบ')" accesskey="5" title="">ออกจากระบบ<br><span class="enrightlink">Log out</span></a></li>
+				
+			</ul>
+		</div>
+		
+	</div>
+<style>
+
+</style>
+<div style='background-color:#2980b9;text-align:right; padding-right:10px; font-color:#ffffff; height:25px; font-size:10pt; padding-top:10px;'><span style="color:#ffffff">Welcome  </span>  
+	<a href="#"><span class="enrightlink">[เจ้าหน้าที่พัสดุ]</span></a>
+	<a href="../Login/logout.php"  onclick="return confirm('ยืนยันการออกจากระบบ')"><span class="enrightlink">[Log out]</span></a>
+		</div>
+
+<div id="main" style="height:100%">
+
+		<div id="banner" style="background:url('https://eds.trang.psu.ac.th/mis/supply/stock/images/bktitle.jpg') right; height:90px">
+			<div class="title" style="padding-top:25px">
+				<h2>ระบบจัดการวัสดุสำนักงาน</h2>
+				<span class="byline">Inventory  Control  System</span>
+			</div>
+		</div>
+		
+<div class="featured" ><div >
+
+<span style="font-size:11pt; font-weight:bold;">บันทึกรายการวัสดุ (Save Article List)</span><br><br>
+	<table style="width:100%; border: 1px solid #eeeeee; ">
+		<tr><td>
+			
+		<fieldset style="border: 1px dotted #aaaaaa; padding-left:5px; padding-bottom:10px;padding-right:5px;">
+		<p><span class="header"></span></p>
+        
+		<form action="save_list_atc.php" method="post">
+		<fieldset><br>
+		 <legend>บันทึกรายการวัสดุ</legend>
+		<p> รหัสวัสดุ :<input type="text" name="atc_id" size=30
+						required="require" placeholder="Enter Article ID" autocomplete="off">
+		<p> ชื่อวัสดุ :<input type="text" name="atc_name" size=30 required="require"
+						placeholder="Enter Article name">
+		<!--<p>ประเภทพัสดุ : <select name="category_id" id="category_id">
+             <option value="0">กรุณาเลือกประเภท</option></select><br>
+		<p>หน่วยนับ : <select name="unit_id" id="unit_id">
+             <option value="0">กรุณาเลือกหน่วยนับ</option></select><br>-->
+			 <p> ประเภทวัสดุ :<select name="category_id">
+			 <?php
+			 require('../Login/connect.php');
+			 $data = $con->query("select*from category order by category_id"); 
+
+    
+
+echo "<option value=\"0\">--กรุณาเลือกประเภท---</option>";
+
+while($row = $data->fetch(PDO::FETCH_ASSOC)){
+	?>
+echo '<option value="<?php echo $row['category_id']?>"><?php echo $row['category_name']?></option>';
+<?php } ?>
+</select>
+			 <p> หน่วยนับ :<select name="unit_id">
+			 <?php
+			 require('../Login/connect.php');
+			 $data = $con->query("select*from unit order by unit_id"); 
+
+    
+
+echo "<option value=\"0\">--กรุณาเลือกหน่วยนับ--</option>";
+
+while($row = $data->fetch(PDO::FETCH_ASSOC)){
+	?>
+echo '<option value="<?php echo $row['unit_id']?>"><?php echo $row['unit_name']?></option>';
+<?php } ?>
+</select><br>
+
+        <p> จำนวน:<input type="text" name="atc_all" size=30 required="require"
+						placeholder="ใส่จำนวน">
+		<!--<p>ประเภทผู้ใช้งาน :<input type="radio" name="user_type" value="A">เจ้าหน้าที่พัสดุ
+		<input type="radio" name="user_type" value="M"> บุคลากร-->
+        		
+		<p> <input type=submit name"submit" value="บันทึก">
+		<!--<input type="reset" id="myreset" value="รีเซ็ต">-->
+		</fieldset><br>
+	</form>
+	<?php
+require('../Login/connect.php');
+
+$query = "SELECT*FROM article a,unit b,category c where a.category_id= c.category_id and a.unit_id= b.unit_id  order by atc_no";
+
+$result = $con->query($query) or die ("Query Failed");
+
+//ตรวจสอบจำนวนข้อมูล
+if($result->rowCount()==0){
+	echo "Nothing Display";
+}
+print "<table border=1 align=center>\n";
+echo "<tr><th>ลำดับ</th><th>รหัสพัสดุ</th><th>ชื่อพัสดุ</th><th>ประเภทพัสดุ</th><th>หน่วยนับ</th><th>จำนวนพัสดุทั้งหมด</th><th>วัยเวลาที่บันทึก</th><th colspan='2'>เลือกทำงาน</th></tr>";
+while($row =$result->fetch(PDO::FETCH_ASSOC)){
+	//แสดงข้อมูลในแต่ละแถวของตาราง
+	echo "<td>",$row['atc_no'],"</td>\n";
+	echo "<td>",$row['atc_id'],"</td>\n";
+	echo "<td>",$row['atc_name'],"</td>\n";
+	echo "<td>",$row['category_id'],"</td>\n";
+	echo "<td>",$row['unit_id'],"</td>\n";
+	echo "<td>",$row['atc_all'],"</td>\n";
+	echo "<td>",$row['a_date'],"</td>\n";
+	
+$atc_id = $row["atc_id"];
+//สร้าง link ไปยังโปรแกรม php ที่ทำหน้าที่แสดงข้อมูลสำหรับแก้ไขพร้อมส่งข้อมูลรหัสแผนก
+echo "<td><a href=\"....php?atc_id=$atc_id\">แก้ไข</a></td>\n";
+//สร้าง link ไปยังโปรแกรม php ที่ทำหน้าที่ลบข้อมูลรพร้อมส่งรหัสแผนกหัสแผนก
+echo "<td><a href=\"...php?atc_id=$atc_id\" onclick=\"return confirm('Are u sure?')\">ลบ</a></td>\n";
+echo "\t</tr>\n";
+}
+echo "</table><br>";
+//แสดงจำนวนข้อมูลที่ดึงมาได้
+
+echo "จำนวนข้อมูลทั้งหมด  :",$result->rowCount(),"รายการ<br>";
+date_default_timezone_set('Asia/Bangkok');
+$dat =date("d/m/y");
+$da =date('Y-m-d H:i:s');
+echo $da;
+//จบการติดต่อกับฐานข้อมูล
+$con=null;
+
+?>
+                </table>
+			</fieldset>
+		</td></tr>
+	</table>
+</div></div>
+	<div id="copyright">
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<span>Copyright (c) 2019 
+		</div>
+	</div>
+</div>
+</body>
+</html>
+<?php }?>
